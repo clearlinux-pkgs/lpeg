@@ -4,7 +4,7 @@
 #
 Name     : lpeg
 Version  : 1.0.2
-Release  : 1
+Release  : 2
 URL      : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Source0  : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Summary  : No detailed summary available
@@ -12,7 +12,7 @@ Group    : Development/Tools
 License  : MIT
 Requires: lpeg-data = %{version}-%{release}
 Requires: lpeg-lib = %{version}-%{release}
-BuildRequires : lua-dev
+BuildRequires : LuaJIT-dev
 Patch1: 0001-makefile-fixes.patch
 
 %description
@@ -44,13 +44,13 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C
-export SOURCE_DATE_EPOCH=1554414088
+export SOURCE_DATE_EPOCH=1554936821
 export LDFLAGS="${LDFLAGS} -fno-lto"
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1554414088
+export SOURCE_DATE_EPOCH=1554936821
 rm -rf %{buildroot}
 %make_install
 
@@ -59,9 +59,8 @@ rm -rf %{buildroot}
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/lua/5.3/re.lua
+/usr/share/lua/5.1/re.lua
 
 %files lib
 %defattr(-,root,root,-)
-/usr/lib64/lua/5.3/lpeg.so
-/usr/lib64/lua/5.3/lpeg.so.1.0.2
+/usr/lib64/lua/5.1/lpeg.so
