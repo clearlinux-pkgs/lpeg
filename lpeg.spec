@@ -4,7 +4,7 @@
 #
 Name     : lpeg
 Version  : 1.0.2
-Release  : 2
+Release  : 3
 URL      : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Source0  : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Summary  : No detailed summary available
@@ -43,14 +43,18 @@ lib components for the lpeg package.
 export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
-export LANG=C
-export SOURCE_DATE_EPOCH=1554936821
-export LDFLAGS="${LDFLAGS} -fno-lto"
+export LANG=C.UTF-8
+export SOURCE_DATE_EPOCH=1564597650
+export GCC_IGNORE_WERROR=1
+export CFLAGS="$CFLAGS -fno-lto "
+export FCFLAGS="$CFLAGS -fno-lto "
+export FFLAGS="$CFLAGS -fno-lto "
+export CXXFLAGS="$CXXFLAGS -fno-lto "
 make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1554936821
+export SOURCE_DATE_EPOCH=1564597650
 rm -rf %{buildroot}
 %make_install
 
