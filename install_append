@@ -1,1 +1,2 @@
 cp -a %{buildroot}/usr/lib64/lua/5.1 %{buildroot}/usr/lib64/lua/5.4
+cp -a %{buildroot}/usr/share/lua/5.1 %{buildroot}/usr/share/lua/5.4
