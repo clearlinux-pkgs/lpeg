@@ -5,7 +5,7 @@
 #
 Name     : lpeg
 Version  : 1.0.2
-Release  : 8
+Release  : 9
 URL      : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Source0  : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Summary  : No detailed summary available
