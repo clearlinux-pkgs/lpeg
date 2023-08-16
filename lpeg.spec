@@ -5,7 +5,7 @@
 #
 Name     : lpeg
 Version  : 1.0.2
-Release  : 9
+Release  : 10
 URL      : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Source0  : http://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.0.2.tar.gz
 Summary  : No detailed summary available
@@ -49,7 +49,8 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1687799400
+export SOURCE_DATE_EPOCH=1692221443
+unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
 export CFLAGS="$CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
 export FCFLAGS="$FFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -59,7 +60,7 @@ make  %{?_smp_mflags}
 
 
 %install
-export SOURCE_DATE_EPOCH=1687799400
+export SOURCE_DATE_EPOCH=1692221443
 rm -rf %{buildroot}
 %make_install
 ## install_append content
