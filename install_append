@@ -1,4 +1,5 @@
-#cp -a %{buildroot}/usr/lib64/lua/5.1 %{buildroot}/usr/lib64/lua/5.4
+mkdir -p %{buildroot}/usr/lib64/lua/5.4
+cp -a %{buildroot}/usr/lib64/lua/*so %{buildroot}/usr/lib64/lua/5.4
 mkdir -p %{buildroot}/usr/lib
 cp -a %{buildroot}/usr/lib64/lua %{buildroot}/usr/lib/lua/
 #cp -a %{buildroot}/usr/share/lua/5.1 %{buildroot}/usr/share/lua/5.4
