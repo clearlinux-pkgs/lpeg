@@ -61,3 +61,24 @@ index 1e32195..44af87a 100644
 -- 
 2.21.0
 
+--- lpeg-1.0.2/makefile~	2023-12-21 20:29:36.000000000 +0000
++++ lpeg-1.0.2/makefile	2023-12-21 20:29:53.388626714 +0000
+@@ -40,7 +40,7 @@
+ # For Linux
+ linux:
+ 	echo $(LUADIR)
+-	$(MAKE) lpeg.so "DLLFLAGS = -shared -fPIC"
++	$(MAKE) lpeg.so "DLLFLAGS = -shared -fPIC "
+ 
+ # For Mac OS
+ macosx:
+--- lpeg-1.0.2/makefile~	2023-12-21 20:29:53.000000000 +0000
++++ lpeg-1.0.2/makefile	2023-12-21 20:31:32.883146167 +0000
+@@ -29,6 +29,7 @@
+ 	-Wmissing-prototypes \
+ 	-Wnested-externs \
+ 	-Wstrict-prototypes \
++	-fPIC \
+ # -Wunreachable-code \
+ 
+ 
