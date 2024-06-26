@@ -1,0 +1,61 @@
+From 4a1f39635a2e7db79851993776b1a8804fd3c241 Mon Sep 17 00:00:00 2001
+From: William Douglas <william.douglas@intel.com>
+Date: Wed, 26 Jun 2024 15:33:52 -0700
+Subject: [PATCH] Makefile fixups
+
+Signed-off-by: William Douglas <william.douglas@intel.com>
+---
+ makefile | 23 +++++++++++++----------
+ 1 file changed, 13 insertions(+), 10 deletions(-)
+
+diff --git a/makefile b/makefile
+index 41a2928..054c89e 100644
+--- a/makefile
++++ b/makefile
+@@ -1,6 +1,13 @@
+ LIBNAME = lpeg
+-LUADIR = ./lua/
++LUAPC ?= lua
++LUADIR ?= $(shell pkg-config --variable=includedir $(LUAPC))
++VERSION ?= 1.0.2
++LUAVERSION ?= 5.4
+ 
++DESTDIR ?= ""
++PREFIX ?= $(DESTDIR)/usr
++LIBDIR = $(PREFIX)/lib64
++DATADIR = $(PREFIX)/share
+ COPT = -O2 -DNDEBUG
+ # COPT = -O0 -DLPEG_DEBUG -g
+ 
+@@ -30,16 +37,8 @@ CC = gcc
+ 
+ FILES = lpvm.o lpcap.o lptree.o lpcode.o lpprint.o lpcset.o
+ 
+-# For Linux
+-linux:
+-	$(MAKE) lpeg.so "DLLFLAGS = -shared -fPIC"
+-
+-# For Mac OS
+-macosx:
+-	$(MAKE) lpeg.so "DLLFLAGS = -bundle -undefined dynamic_lookup"
+-
+ lpeg.so: $(FILES)
+-	env $(CC) $(DLLFLAGS) $(FILES) -o lpeg.so
++	env $(CC) -shared -fPIC $(LDFLAGS) $(FILES) -o lpeg.so
+ 
+ $(FILES): makefile
+ 
+@@ -49,6 +48,10 @@ test: test.lua re.lua lpeg.so
+ clean:
+ 	rm -f $(FILES) lpeg.so
+ 
++.PHONY: install
++install:
++	install -p -Dm 0755 lpeg.so $(LIBDIR)/lua/$(LUAVERSION)/lpeg.so
++	install -p -Dm 0644 re.lua $(DATADIR)/lua/$(LUAVERSION)/re.lua
+ 
+ lpcap.o: lpcap.c lpcap.h lptypes.h
+ lpcode.o: lpcode.c lptypes.h lpcode.h lptree.h lpvm.h lpcap.h lpcset.h
+-- 
+2.45.2
+
