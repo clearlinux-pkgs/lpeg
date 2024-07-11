@@ -7,7 +7,7 @@
 #
 Name     : lpeg
 Version  : 1.1.0
-Release  : 16
+Release  : 17
 URL      : https://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.1.0.tar.gz
 Source0  : https://www.inf.puc-rio.br/~roberto/lpeg/lpeg-1.1.0.tar.gz
 Summary  : No detailed summary available
@@ -15,7 +15,7 @@ Group    : Development/Tools
 License  : MIT
 Requires: lpeg-data = %{version}-%{release}
 Requires: lpeg-lib = %{version}-%{release}
-BuildRequires : lua-dev
+BuildRequires : LuaJIT-dev
 # Suppress stripping binaries
 %define __strip /bin/true
 %define debug_package %{nil}
@@ -53,7 +53,7 @@ export http_proxy=http://127.0.0.1:9/
 export https_proxy=http://127.0.0.1:9/
 export no_proxy=localhost,127.0.0.1,0.0.0.0
 export LANG=C.UTF-8
-export SOURCE_DATE_EPOCH=1720611647
+export SOURCE_DATE_EPOCH=1720717893
 unset LD_AS_NEEDED
 export GCC_IGNORE_WERROR=1
 CLEAR_INTERMEDIATE_CFLAGS="$CLEAR_INTERMEDIATE_CFLAGS -fdebug-types-section -femit-struct-debug-baseonly -fno-lto -g1 -gno-column-info -gno-variable-location-views -gz=zstd "
@@ -82,7 +82,7 @@ FFLAGS="$CLEAR_INTERMEDIATE_FFLAGS"
 FCFLAGS="$CLEAR_INTERMEDIATE_FCFLAGS"
 ASFLAGS="$CLEAR_INTERMEDIATE_ASFLAGS"
 LDFLAGS="$CLEAR_INTERMEDIATE_LDFLAGS"
-export SOURCE_DATE_EPOCH=1720611647
+export SOURCE_DATE_EPOCH=1720717893
 rm -rf %{buildroot}
 export GOAMD64=v2
 GOAMD64=v2
@@ -93,9 +93,8 @@ GOAMD64=v2
 
 %files data
 %defattr(-,root,root,-)
-/usr/share/lua/5.4/re.lua
+/usr/share/lua/5.1/re.lua
 
 %files lib
 %defattr(-,root,root,-)
 /usr/lib/lua/5.1/lpeg.so
-/usr/lib/lua/5.4/lpeg.so

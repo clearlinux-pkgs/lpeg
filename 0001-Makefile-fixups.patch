@@ -1,25 +1,28 @@
-From 6e1b852c4bc971f9cf40ffb963ab7965eafe4dea Mon Sep 17 00:00:00 2001
+From fefdd1732950ba275de35bc104bd68512268cd93 Mon Sep 17 00:00:00 2001
 From: William Douglas <william.douglas@intel.com>
 Date: Wed, 26 Jun 2024 15:33:52 -0700
 Subject: [PATCH] Makefile fixups
 
+This is LuaJIT built now as it is only used by neovim and that forces
+5.1 lua. If something else needs this that uses a new lua, this will
+need to provide both.
+
 Signed-off-by: William Douglas <william.douglas@intel.com>
 ---
- makefile | 25 +++++++++++++++----------
- 1 file changed, 15 insertions(+), 10 deletions(-)
+ makefile | 27 +++++++++++++++------------
+ 1 file changed, 15 insertions(+), 12 deletions(-)
 
 diff --git a/makefile b/makefile
-index 41a2928..3fbf38f 100644
+index 41a2928..1f3ff65 100644
 --- a/makefile
 +++ b/makefile
-@@ -1,6 +1,14 @@
+@@ -1,6 +1,13 @@
  LIBNAME = lpeg
 -LUADIR = ./lua/
-+LUAPC ?= lua
++LUAPC ?= luajit
 +LUADIR ?= $(shell pkg-config --variable=includedir $(LUAPC))
 +VERSION ?= 1.0.2
-+LUAVERSION ?= 5.4
-+LUAVERSION51 ?= 5.1
++LUAVERSION ?= 5.1
  
 +DESTDIR ?= ""
 +PREFIX ?= $(DESTDIR)/usr
@@ -28,7 +31,12 @@ index 41a2928..3fbf38f 100644
  COPT = -O2 -DNDEBUG
  # COPT = -O0 -DLPEG_DEBUG -g
  
-@@ -30,16 +38,8 @@ CC = gcc
+@@ -25,23 +32,15 @@ CWARNS = -Wall -Wextra -pedantic \
+ # -Wunreachable-code \
+ 
+ 
+-CFLAGS = $(CWARNS) $(COPT) -std=c99 -I$(LUADIR) -fPIC
+ CC = gcc
  
  FILES = lpvm.o lpcap.o lptree.o lpcode.o lpprint.o lpcset.o
  
@@ -44,20 +52,23 @@ index 41a2928..3fbf38f 100644
 -	env $(CC) $(DLLFLAGS) $(FILES) -o lpeg.so
 +	env $(CC) -shared -fPIC $(LDFLAGS) $(FILES) -o lpeg.so
  
- $(FILES): makefile
+-$(FILES): makefile
++$(FILES): %.o: %.c
++	$(CC) $(CFLAGS) -fPIC -I$(LUADIR) -c $^
  
-@@ -49,6 +49,11 @@ test: test.lua re.lua lpeg.so
+ test: test.lua re.lua lpeg.so
+ 	./test.lua
+@@ -49,6 +48,10 @@ test: test.lua re.lua lpeg.so
  clean:
  	rm -f $(FILES) lpeg.so
  
 +.PHONY: install
 +install:
 +	install -p -Dm 0755 lpeg.so $(LIBDIR)/lua/$(LUAVERSION)/lpeg.so
-+	install -p -Dm 0755 lpeg.so $(LIBDIR)/lua/$(LUAVERSION51)/lpeg.so
 +	install -p -Dm 0644 re.lua $(DATADIR)/lua/$(LUAVERSION)/re.lua
  
  lpcap.o: lpcap.c lpcap.h lptypes.h
  lpcode.o: lpcode.c lptypes.h lpcode.h lptree.h lpvm.h lpcap.h lpcset.h
 -- 
-2.45.2
+2.45.1
 
